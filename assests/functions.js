@@ -231,8 +231,7 @@ function saveReceipt() {
 
     margins = {
         top: 20,
-        left: 20,
-        width:
+        left: 20
     };
 
     pdf.fromHTML(
