@@ -17,7 +17,7 @@
 </head>
 
 <body class="bGrey">
-    <section id="contact" class="contact bLight">
+    <section id="contact" class="contact bLight section scrollspy">
         <div class="row">
             <div class="col s4"><a class="cBlack" href="tel:+919422728489"><span class="show-on-small"><i
                             class="fa fa-phone" aria-hidden="true"></i> Call Us </span><span
@@ -28,7 +28,7 @@
                         class="hide-on-med-and-down">: +91 9422728489</span></a></div>
         </div>
     </section>
-    <div class="navbar">
+    <div class="navbar section scrollspy">
         <nav class="bGrey">
             <a href="#" class="cGreen logo"><span>Bafna Farm's</span>&nbsp;<span class="hide-on-small-only">fresh fruits
                     & vegetables</span></a>
@@ -78,14 +78,14 @@
 
     <section class="container" style="padding-bottom: 100px;">
         
-        <div class="row" id="setLocation">
+        <div class="row section scrollspy" id="setLocation">
             <div class="col">
                 <h3 class="cPink">Set Location <i class="material-icons small">my_location</i></h3>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12 l4 m6 push-m3 push-l4">
-                <select id="location" class="location" onchange="getLocation()">
+                <select id="location" class="location section scrollspy" onchange="getLocation()">
                     
                     <option value="vambori">Vambori</option>
                     <option value="rahuri">Rahuri</option>
@@ -97,8 +97,7 @@
         <h5 id="line" class="center-align pinkLine"><span><i class="fa fa-angle-down cPink arrow"
                     aria-hidden="true"></i></span>
         </h5>
-        <div id="setQuantity">
-
+        <div id="setQuantity" class="section scrollspy">
         <form method="post" action="" id="quantity" onsubmit="allvaluestostring(this)">
             <div class="row">
                 <div class="col">
@@ -214,7 +213,7 @@
             </div>
             <h5 id="line" class="center-align greenLine"><span><i class="fa fa-angle-down cGreen arrow"
                         aria-hidden="true"></i></span></h5>
-            <div class="row" id="setAddress">
+            <div class="row section scrollspy" id="setAddress">
                 <div class="col">
                     <h3 class="cGreen">Get Live address <i class="material-icons small">edit_location</i></h3>
                 </div>
@@ -252,12 +251,12 @@
         <h5 id="line" class="center-align pinkLine"><span><i class="fa fa-angle-down cPink arrow"
                     aria-hidden="true"></i></span>
         </h5>
-        <div class="row">
+        <div class="row section scrollspy">
             <div class="col">
                 <h3 class="cPink">Place Order <i class="material-icons small">local_shipping</i></h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row section scrollspy">
             <div class="col s6 l8 m8">
                 <a class="btn-small waves-effect waves-light btn-block bPink cBlack" id="payment" onclick="whatsapp()"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</a>
             </div>
