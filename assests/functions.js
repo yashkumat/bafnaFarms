@@ -27,7 +27,6 @@ $(document).ready(function () {
     $('.slider').slider({ interval: 3000 });
     $('.scrollspy').scrollSpy();
     $('select').formSelect();
-    $('select').material_select();
 });
 
 //  Get location
