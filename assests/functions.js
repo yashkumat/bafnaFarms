@@ -2,7 +2,7 @@ var showAddressButton = document.getElementById("showAddress");
 var message = "";
 var address = "";
 var whatsappTable = "";
-var total =[];
+var total = [];
 var FinalAmount = "";
 var prices = {
     // [price in vambori, price in rahuri, prive in nagar]
@@ -17,10 +17,18 @@ var items = [];
 var quantity = []
 var date = new Date();
 var content;
-var ItemData="";
-var invoice="";
+var ItemData = "";
+var invoice = "";
 var price = [];
 var d = "";
+
+// Materialize initialiZation
+$(document).ready(function () {
+    $('.slider').slider({ interval: 3000 });
+    $('.scrollspy').scrollSpy();
+    $('select').formSelect();
+    $('select').material_select();
+});
 
 //  Get location
 function getLocation() {
@@ -31,12 +39,11 @@ function getLocation() {
         setValues(1)
     } else {
         setValues(2)
-    } 
+    }
 }
 
 // Set price and variety
-function setValues(x) { 
-
+function setValues(x) {
     document.getElementById('mangoPrice').innerHTML = prices.mango[x]
     document.getElementById('grapesPrice').innerHTML = prices.grapes[x]
     document.getElementById('orangePrice').innerHTML = prices.oranges[x]
@@ -45,7 +52,7 @@ function setValues(x) {
     document.getElementById('muskmelonPrice').innerHTML = prices.muskmelon[x]
 }
 
-window.onload = function(){
+window.onload = function () {
     document.getElementById('mangoVariety').innerHTML = prices.mango[3]
     document.getElementById('grapeVariety').innerHTML = prices.grapes[3]
     document.getElementById('orangeVariety').innerHTML = prices.oranges[3]
@@ -64,11 +71,11 @@ function showPosition(position) {
 
     var element = document.getElementById("hideCheck");
 
-    if (position.coords.latitude ){
+    if (position.coords.latitude) {
         address = "https://www.google.com/maps/place/" + position.coords.latitude + "," + position.coords.longitude;
         element.innerHTML = "<i class='fa fa-check-circle whiteColor2' id='check' aria-hidden='true'></i>";
         showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light blackBack whiteColor2 btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
-    }else{
+    } else {
         element.innerHTML = "<small>Enter Manually in whatsapp!<small>";
     }
 }
@@ -77,7 +84,7 @@ function showPosition(position) {
 // get form value stored in out. out is formated to json format in jsonString which is then converted to json object obj.
 function allvaluestostring(that) {
 
-    if(address !="" && d!=""){
+    if (address != "" && d != "") {
         var out = "";
 
         $.each($(that).serializeArray(), function (idx, el) {
@@ -89,7 +96,7 @@ function allvaluestostring(that) {
         var obj = JSON.parse(jsonString);
 
         quantity = Object.values(obj);
-        
+
         items = Object.keys(obj)
 
         var i = 0;
@@ -142,7 +149,6 @@ function allvaluestostring(that) {
         }
 
         invoice =
-
             '<div class="row">' +
             '<div class="col s8 push-s2">' +
             '<div class="card">' +
@@ -165,13 +171,14 @@ function allvaluestostring(that) {
             '</div>';
 
         document.getElementById('invoice').innerHTML = invoice;
-    }else{
+    } else {
         var toastHTML = '<small>Please set address or refresh</small><a class="btn-flat toast-action" href="#setAddress">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }
 
 };
 
+// Type if nuber only
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -185,10 +192,10 @@ function isNumber(evt) {
 // send whatsapp message
 function whatsapp() {
 
-    if (address == "" || d == "" || ItemData == ""){
+    if (address == "" || d == "" || ItemData == "") {
         var toastHTML = '<small>Please provide above information or call or Refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
-    }else{
+    }else {
         whatsappTable = "Item - Quantity\n";
         for (var j = 0; j < price.length; j++) {
             if (quantity[j] > 0)
@@ -210,38 +217,26 @@ $("#quantity").submit(function (e) {
     e.preventDefault();
 });
 
-// select
-$(document).ready(function () {
-    $('select').formSelect();
-});
-
-// image slider on loanding page
-$(document).ready(function () {
-    $('.slider').slider({
-        interval: 3000
-    });
-});
-
 // save bill
 function saveReceipt() {
     var pdf = new jsPDF('p', 'pt', 'letter');
-    
+
     source = $('#receiptData')[0];
 
     margins = {
         top: 20,
         left: 20,
     };
-    
+
     pdf.fromHTML(
-        source, 
-        margins.left, 
-        margins.top, { 
-        'width': margins.width, 
+        source,
+        margins.left,
+        margins.top, {
+        'width': margins.width,
     },
 
         function (dispose) {
-            
+
             pdf.save('Test.pdf');
         }, margins
     );
@@ -253,20 +248,14 @@ function between(x, min, max) {
 }
 
 // check if location is set, also check if quantity is positive
-function checkIfLocationIsSet(event){
-    if(d==""){
+function checkIfLocationIsSet(event) {
+    if (d == "") {
         var toastHTML = '<small>Please set location</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
-    } else if (!between(event.keyCode, 47, 58)){
+    } else if (!between(event.keyCode, 47, 58)) {
         var toastHTML = '<small>Enter positive quantity in numbers!</small><a class="btn-flat toast-action href="#setQuantity" ">Undo</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }
-}
-
-
-// reset form
-function resetForm() {
-    document.getElementById("quantity").reset();
 }
 
 // Hides pulse midway call button on navbar
@@ -276,13 +265,6 @@ $(document).ready(function () {
     });
 });
 
-// Dropdown
-$(".dropdown-trigger").dropdown();
-
-// Scrollspy
-$(document).ready(function(){
-    $('.scrollspy').scrollSpy();
-  });
 
 
 
