@@ -185,7 +185,7 @@ function isNumber(evt) {
 // send whatsapp message
 function whatsapp() {
 
-    if (address == "" || d == "" | ItemData = ""){
+    if (address == "" || d == "" | ItemData == ""){
         var toastHTML = '<small>Please provide above information or call or Refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }else{
