@@ -279,7 +279,10 @@ $(document).ready(function () {
 // Dropdown
 $(".dropdown-trigger").dropdown();
 
-
+// Scrollspy
+$(document).ready(function(){
+    $('.scrollspy').scrollSpy();
+  });
 
 
 
