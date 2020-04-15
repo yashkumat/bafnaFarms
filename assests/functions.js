@@ -27,6 +27,7 @@ $(document).ready(function () {
     $('.slider').slider({ interval: 3000 });
     $('.scrollspy').scrollSpy();
     $('select').formSelect();
+    // $('select').material_select();
 });
 
 //  Get location
@@ -79,6 +80,10 @@ function showPosition(position) {
     }
 }
 
+// First letter capital
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 // get form value stored in out. out is formated to json format in jsonString which is then converted to json object obj.
 function allvaluestostring(that) {
@@ -87,7 +92,9 @@ function allvaluestostring(that) {
         var out = "";
 
         $.each($(that).serializeArray(), function (idx, el) {
-            el.value == 0 ? (out += "\n\"" + el.name + "\":\"0\",") : (out += "\n\"" + el.name + '\" : \"' + el.value + "\",");
+            el.value == 0
+              ? (out += '\n"' + capitalizeFirstLetter(el.name) + '":"0",')
+              : (out += '\n"' + capitalizeFirstLetter(el.name) + '" : "' + el.value +'",');
         });
 
         var jsonString = "{" + out.substring(0, out.length - 1) + "}";
@@ -157,11 +164,11 @@ function allvaluestostring(that) {
             '<div class="row">' +
             '<div class="col s6 l3 push-l3">' +
             '<a class="btn-small btn-block waves-effect waves-light bGreen cBlack" href="#payment">' +
-            '<i class="material-icons right">add_shopping_cart</i>Place order</a>' +
+            '<i class="material-icons">add_shopping_cart</i> Place order</a>' +
             '</div>' +
             '<div class="col s6 l3 push-l3">' +
             '<button class="btn-small btn-block waves-effect waves-light bGreen cBlack" onclick="saveReceipt()">' +
-            '<i class="material-icons right" >save_alt</i>Save Receipt</button>' +
+            '<i class="material-icons">save_alt</i> Save Receipt</button>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -171,7 +178,7 @@ function allvaluestostring(that) {
 
         document.getElementById('invoice').innerHTML = invoice;
     } else {
-        var toastHTML = '<small>Please set address or refresh</small><a class="btn-flat toast-action" href="#setAddress">Click here</a>';
+        var toastHTML = '<small>Please provide all above information!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }
 
@@ -192,7 +199,7 @@ function isNumber(evt) {
 function whatsapp() {
 
     if (address == "" || d == "" || ItemData == "") {
-        var toastHTML = '<small>Please provide above information or call or Refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
+        var toastHTML = '<small>Please provide all above information or call or refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }else {
         whatsappTable = "Item - Quantity\n";
@@ -203,7 +210,7 @@ function whatsapp() {
 
         whatsappTable += "\nFinal Amount: " + FinalAmount;
 
-        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:" + whatsappTable + "\n\nDeliver to Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
+        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:\n" + whatsappTable + "\n\nDeliver to Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
         console.log(message);
         var url = 'https://wa.me/+919422728489/?text=' + encodeURIComponent(message);
         window.open(url);
