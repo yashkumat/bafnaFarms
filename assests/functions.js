@@ -74,7 +74,7 @@ function showPosition(position) {
     if (position.coords.latitude) {
         address = "https://www.google.com/maps/place/" + position.coords.latitude + "," + position.coords.longitude;
         element.innerHTML = "<i class='fa fa-check-circle cGrey' id='check' aria-hidden='true'></i>";
-        showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light bGreen cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
+        showAddressButton.innerHTML = "<a target="_blank" href='" + address + "' class='waves-effect waves-light bGreen cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
     } else {
         element.innerHTML = "<small>Enter Manually in whatsapp!<small>";
     }
@@ -232,14 +232,16 @@ function saveReceipt() {
     margins = {
         top: 20,
         left: 20,
+        width:
     };
 
     pdf.fromHTML(
         source,
         margins.left,
-        margins.top, {
-        'width': margins.width,
-    },
+        margins.top, 
+        {
+            "width":"100%"
+        },
 
         function (dispose) {
 
