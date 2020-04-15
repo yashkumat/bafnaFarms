@@ -189,7 +189,7 @@ function whatsapp() {
         var toastHTML = '<small>Please provide above information or call or Refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
         M.toast({ html: toastHTML, classes: 'rounded' });
     }else{
-        whatsappTable = "Item | Quantity\n";
+        whatsappTable = "Item - Quantity\n";
         for (var j = 0; j < price.length; j++) {
             if (quantity[j] > 0)
                 whatsappTable += items[j] + " - " + quantity[j] + "\n"
@@ -197,7 +197,7 @@ function whatsapp() {
 
         whatsappTable += "\nFinal Amount: " + FinalAmount;
 
-        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n" + whatsappTable + "\n\nyour Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
+        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:" + whatsappTable + "\n\nDeliver to Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
         console.log(message);
         var url = 'https://wa.me/+919422728489/?text=' + encodeURIComponent(message);
         window.open(url);
