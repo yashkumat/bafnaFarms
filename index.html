@@ -77,7 +77,7 @@
 
 
     <section class="container" style="padding-bottom: 100px;">
-        
+
         <div class="row section scrollspy" id="setLocation">
             <div class="col">
                 <h3 class="cPink">Set Location <i class="material-icons small">my_location</i></h3>
@@ -86,7 +86,7 @@
         <div class="row">
             <div class="input-field col s12 l4 m6 push-m3 push-l4">
                 <select id="location" class="location section scrollspy" onchange="getLocation()">
-                    
+                    <option value="" disabled selected>Set Location</option>
                     <option value="vambori">Vambori</option>
                     <option value="rahuri">Rahuri</option>
                     <option value="ahmednagar">Ahmednagar</option>
@@ -98,154 +98,161 @@
                     aria-hidden="true"></i></span>
         </h5>
         <div id="setQuantity" class="section scrollspy">
-        <form method="post" action="" id="quantity" onsubmit="allvaluestostring(this)">
-            <div class="row">
-                <div class="col">
-                    <h3 class="cDark">Enter Quantity <i class="material-icons small">check_box</i></h3>
+            <form method="post" action="" id="quantity" onsubmit="allvaluestostring(this)">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="cDark">Enter Quantity <i class="material-icons small">check_box</i></h3>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12 l3 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/mangoesThumbnail.jpg" width="100%" height="180vw">
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="mangoPrice"><small>select location</small></span> </p>
-                            Variety<small> - <span id="mangoVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="mangoes" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="mangoes">Enter Quantity:</label>
+                <div class="row">
+                    <div class="col s12 l3 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/mangoesThumbnail.jpg" width="100%" height="180vw">
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="mangoPrice"><small>select location</small></span> </p>
+                                Variety<small> - <span id="mangoVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="mangoes" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="mangoes">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col s12 l3 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/grapesThumbnail.jpg" width="100%" height="180vw">
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="grapesPrice"><small>select location</small></span> </p>
-                            Variety<small> - <span id="grapeVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="grapes" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="grapes">Enter Quantity:</label>
+                    <div class="col s12 l3 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/grapesThumbnail.jpg" width="100%" height="180vw">
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="grapesPrice"><small>select location</small></span> </p>
+                                Variety<small> - <span id="grapeVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="grapes" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="grapes">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col s12 l3 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/orangesThumbnail.jpeg" width="100%" height="180vw">
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="orangePrice"><small>select location</small></span></p>
-                            Variety<small> - <span id="orangeVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="oranges" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="oranges">Enter Quantity:</label>
+                    <div class="col s12 l3 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/orangesThumbnail.jpeg" width="100%" height="180vw">
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="orangePrice"><small>select location</small></span></p>
+                                Variety<small> - <span id="orangeVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="oranges" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="oranges">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col s12 l3 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/watermelonThumbnail.jpeg" width="100%" height="180vw">
+                    <div class="col s12 l3 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/watermelonThumbnail.jpeg" width="100%" height="180vw">
 
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="watermelonPrice"><small>select location</small></span> </p>
-                            Variety<small> - <span id="watermelonVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="watermelon" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="onion">Enter Quantity:</label>
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="watermelonPrice"><small>select location</small></span> </p>
+                                Variety<small> - <span id="watermelonVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="watermelon" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="onion">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col s12 l3 m6 offset-l3">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/onionThumbnail.jpg" width="100%" height="180vw">
+                    <div class="col s12 l3 m6 offset-l3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/onionThumbnail.jpg" width="100%" height="180vw">
 
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="onionPrice"><small>select location</small></span> </p>
-                            Variety<small> - <span id="onionVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="onion" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="onion">Enter Quantity:</label>
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="onionPrice"><small>select location</small></span> </p>
+                                Variety<small> - <span id="onionVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="onion" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="onion">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col s12 l3 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="images/muskmelonThumbnail.jpeg" width="100%" height="180vw">
+                    <div class="col s12 l3 m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="images/muskmelonThumbnail.jpeg" width="100%" height="180vw">
 
-                        </div>
-                        <div class="card-content cBlack">
-                            <p>Price - <span id="muskmelonPrice"><small>select location</small></span> </p>
-                            Variety<small> - <span id="muskmelonVariety"></span></small>
-                        </div>
-                        <div class="card-action">
-                            <div class="input-field">
-                                <input name="muskmelon" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
-                                <label class="active" for="muskmelon">Enter Quantity:</label>
+                            </div>
+                            <div class="card-content cBlack">
+                                <p>Price - <span id="muskmelonPrice"><small>select location</small></span> </p>
+                                Variety<small> - <span id="muskmelonVariety"></span></small>
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field">
+                                    <input name="muskmelon" type="number" class="validate"
+                                        onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                    <label class="active" for="muskmelon">Enter Quantity:</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <h5 id="line" class="center-align greenLine"><span><i class="fa fa-angle-down cGreen arrow"
-                        aria-hidden="true"></i></span></h5>
-            <div class="row section scrollspy" id="setAddress">
-                <div class="col">
-                    <h3 class="cGreen">Get Live address <i class="material-icons small">edit_location</i></h3>
+                <h5 id="line" class="center-align greenLine"><span><i class="fa fa-angle-down cGreen arrow"
+                            aria-hidden="true"></i></span></h5>
+                <div class="row section scrollspy" id="setAddress">
+                    <div class="col">
+                        <h3 class="cGreen">Get Live address <i class="material-icons small">edit_location</i></h3>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s4">
-                    <a class="waves-effect waves-light btn-small btn-block bGreen cBlack" onclick="getAddress()"
-                        id="hideCheck"><i class="fa fa-map-marker" id="check" aria-hidden="true"></i> Click here</a>
+                <div class="row">
+                    <div class="col s4">
+                        <a class="waves-effect waves-light btn-small btn-block bGreen cBlack" onclick="getAddress()"
+                            id="hideCheck"><i class="fa fa-map-marker" id="check" aria-hidden="true"></i> Click here</a>
+                    </div>
+                    <div class="col s8">
+                        <p class="center-align" style="margin: 0;padding: 0;" id="showAddress"><u>your address link will
+                                be shown here...</u></p>
+                    </div>
                 </div>
-                <div class="col s8">
-                    <p class="center-align" style="margin: 0;padding: 0;" id="showAddress"><u>your address link will be shown here...</u></p>
+                <h5 id="line" class="center-align yellowLine"><span><i class="fa fa-angle-down cYellow arrow"
+                            aria-hidden="true"></i></span>
+                </h5>
+                <div class="row">
+                    <div class="col">
+                        <h3 class="cYellow">Generate Bill <i class="material-icons small">printer</i></h3>
+                    </div>
                 </div>
-            </div>
-            <h5 id="line" class="center-align yellowLine"><span><i class="fa fa-angle-down cYellow arrow"
-                        aria-hidden="true"></i></span>
-            </h5>
-            <div class="row">
-                <div class="col">
-                    <h3 class="cYellow">Generate Bill <i class="material-icons small">printer</i></h3>
+                <div class="row">
+                    <div class="col s6 push-s3">
+                        <button class="btn-small waves-effect waves-light btn-block bYellow cBlack" type="submit"><i
+                                class="fa fa-Print" aria-hidden="true"></i>Generate bill</a>
+                    </div>
+                    <div>
+                        <span id="invoice" style="padding: 100px;">
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s6 push-s3">
-                    <button class="btn-small waves-effect waves-light btn-block bYellow cBlack" type="submit"><i
-                            class="fa fa-Print" aria-hidden="true"></i>Generate bill</a>
-                </div>
-                <div>
-                    <span id="invoice" style="padding: 100px;">
-                    </span>
-                </div>
-            </div>
-        </form>
+            </form>
         </div>
 
         <h5 id="line" class="center-align pinkLine"><span><i class="fa fa-angle-down cPink arrow"
@@ -258,10 +265,12 @@
         </div>
         <div class="row section scrollspy">
             <div class="col s6 l8 m8">
-                <a class="btn-small waves-effect waves-light btn-block bPink cBlack" id="payment" onclick="whatsapp()"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</a>
+                <a class="btn-small waves-effect waves-light btn-block bPink cBlack" id="payment"
+                    onclick="whatsapp()"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</a>
             </div>
             <div class="col s6 l4 m4">
-                <a class="waves-effect waves-light btn-block btn-small bPink cBlack" href="tel:+919422728489"><i class="fa fa-phone" aria-hidden="true"></i><span class="hide-on-small-only"> Call</span></a>
+                <a class="waves-effect waves-light btn-block btn-small bPink cBlack" href="tel:+919422728489"><i
+                        class="fa fa-phone" aria-hidden="true"></i><span class="hide-on-small-only"> Call</span></a>
             </div>
         </div>
     </section>
