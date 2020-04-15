@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bafna Farm's fresh fruits & vegetables</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="assests/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body class="bGrey">
+    <section id="contact" class="contact bLight">
+        <div class="row">
+            <div class="col s4"><a class="cBlack" href="tel:+919422728489"><span class="show-on-small"><i
+                            class="fa fa-phone" aria-hidden="true"></i> Call Us </span><span
+                        class="hide-on-med-and-down">: +91 9422728489</span></a></div>
+            <div class="col s8"><a class="cBlack"
+                    href='https://wa.me/+919422728489/?text=Thank%20you%20for%20contacting%3A%20%0ABAFNA%20FARMS%20fresh%20%26%20organic%20fruits%20%26%20vegetable!%0A%0AEnter%20Item%20name%3A%20%0AQuantity%3A%0A%0A%0AWe%20will%20get%20back%20to%20you%20asap!'><span><i
+                            class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp Us </span><span
+                        class="hide-on-med-and-down">: +91 9422728489</span></a></div>
+        </div>
+    </section>
+    <div class="navbar">
+        <nav class="bGrey">
+            <a href="#" class="cGreen logo"><span>Bafna Farm's</span>&nbsp;<span class="hide-on-small-only">fresh fruits
+                    & vegetables</span></a>
+        </nav>
+        <a class="btn-floating halfway-fab waves-effect pulse waves-light bPink callShortcut"
+            href="tel:+919422728489"><i class="material-icons">call</i></a>
+    </div>
+    <section>
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="images/oranges.jpg">
+                    <div class="caption left-align">
+                        <h3 class="cGrey">Farming since last 5 decades!</h3>
+                        <h5 class="cGrey">Good Health <span class="material-icons">swap_horizontal_circle</span> Organic
+                            Products</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="images/mangoes.jpg">
+                    <div class="caption right-align">
+                        <h3 class="cGrey">Our Motto</h3>
+                        <h5 class="cGrey">Provide our family organic and fresh fruits and
+                            vegetables</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="images/grapes.jpg">
+                    <div class="caption left-align">
+                        <h3 class="cGrey">Organic and Fresh</h3>
+                        <h5 class="cGrey">We dont use any type of chemical for artifical
+                            ripening</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="images/onion.jpg">
+                    <div class="caption right-align">
+                        <h3 class="cGrey">Main Business</h3>
+                        <h5 class="cGrey">Onion Trading and Exporters</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <section class="container" style="padding-bottom: 100px;">
+        
+        <div class="row" id="setLocation">
+            <div class="col">
+                <h3 class="cPink">Set Location <i class="material-icons small">my_location</i></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 l4 m6 push-m3 push-l4">
+                <select id="location" class="location" onchange="getLocation()">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="vambori">Vambori</option>
+                    <option value="rahuri">Rahuri</option>
+                    <option value="ahmednagar">Ahmednagar</option>
+                </select>
+            </div>
+        </div>
+        <h5 id="line" class="center-align pinkLine"><span><i class="fa fa-angle-down cPink arrow"
+                    aria-hidden="true"></i></span>
+        </h5>
+        <div id="setQuantity">
+
+        <form method="post" action="" id="quantity" onsubmit="allvaluestostring(this)">
+            <div class="row">
+                <div class="col">
+                    <h3 class="cDark">Enter Quantity <i class="material-icons small">check_box</i></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l3 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/mangoesThumbnail.jpg" width="100%" height="180vw">
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="mangoPrice"><small>select location</small></span> </p>
+                            Variety<small> - <span id="mangoVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="mangoes" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="mangoes">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/grapesThumbnail.jpg" width="100%" height="180vw">
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="grapesPrice"><small>select location</small></span> </p>
+                            Variety<small> - <span id="grapeVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="grapes" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="grapes">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/orangesThumbnail.jpeg" width="100%" height="180vw">
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="orangePrice"><small>select location</small></span></p>
+                            Variety<small> - <span id="orangeVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="oranges" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="oranges">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/watermelonThumbnail.jpeg" width="100%" height="180vw">
+
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="watermelonPrice"><small>select location</small></span> </p>
+                            Variety<small> - <span id="watermelonVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="watermelon" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="onion">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3 m6 offset-l3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/onionThumbnail.jpg" width="100%" height="180vw">
+
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="onionPrice"><small>select location</small></span> </p>
+                            Variety<small> - <span id="onionVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="onion" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="onion">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/muskmelonThumbnail.jpeg" width="100%" height="180vw">
+
+                        </div>
+                        <div class="card-content cBlack">
+                            <p>Price - <span id="muskmelonPrice"><small>select location</small></span> </p>
+                            Variety<small> - <span id="muskmelonVariety"></span></small>
+                        </div>
+                        <div class="card-action">
+                            <div class="input-field">
+                                <input name="muskmelon" type="number" class="validate" onkeypress="return isNumber(event)" onkeyup="checkIfLocationIsSet(event)">
+                                <label class="active" for="muskmelon">Enter Quantity:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 id="line" class="center-align greenLine"><span><i class="fa fa-angle-down cGreen arrow"
+                        aria-hidden="true"></i></span></h5>
+            <div class="row" id="setAddress">
+                <div class="col">
+                    <h3 class="cGreen">Get Live address <i class="material-icons small">edit_location</i></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <a class="waves-effect waves-light btn-small btn-block bGreen cBlack" onclick="getAddress()"
+                        id="hideCheck"><i class="fa fa-map-marker" id="check" aria-hidden="true"></i> Click here</a>
+                </div>
+                <div class="col s8">
+                    <p class="center-align" style="margin: 0;padding: 0;" id="showAddress"><u>your address link will be shown here...</u></p>
+                </div>
+            </div>
+            <h5 id="line" class="center-align yellowLine"><span><i class="fa fa-angle-down cYellow arrow"
+                        aria-hidden="true"></i></span>
+            </h5>
+            <div class="row">
+                <div class="col">
+                    <h3 class="cYellow">Generate Bill <i class="material-icons small">printer</i></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 push-s3">
+                    <button class="btn-small waves-effect waves-light btn-block bYellow cBlack" type="submit"><i
+                            class="fa fa-Print" aria-hidden="true"></i>Generate bill</a>
+                </div>
+                <div>
+                    <span id="invoice" style="padding: 100px;">
+                    </span>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <h5 id="line" class="center-align pinkLine"><span><i class="fa fa-angle-down cPink arrow"
+                    aria-hidden="true"></i></span>
+        </h5>
+        <div class="row">
+            <div class="col">
+                <h3 class="cPink">Place Order <i class="material-icons small">local_shipping</i></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 l8 m8">
+                <a class="btn-small waves-effect waves-light btn-block bPink cBlack" id="payment" onclick="whatsapp()"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</a>
+            </div>
+            <div class="col s6 l4 m4">
+                <a class="waves-effect waves-light btn-block btn-small bPink cBlack" href="tel:+919422728489"><i class="fa fa-phone" aria-hidden="true"></i><span class="hide-on-small-only"> Call</span></a>
+            </div>
+        </div>
+    </section>
+    <footer class="page-footer bDark">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="cBlack">Bafna Farm's</h5>
+                    <p class="cGrey">Farmers since 5 decades.<br> We dont use any type of chemicals.<br>We deliver fresh
+                        and orgainc Fruits and Vegetables.
+                    </p>
+                    <h5>Vambori | Rahuri | Ahemadnagar</h5>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="cBlack">Contact</h5>
+                    <ul>
+                        <li><a class="cGrey" href="tel:+919422728489"><i class="material-icons tiny cGrey">call</i>
+                                Pankaj Bafna</a></li>
+                        <li><a class="cGrey" href="tel:+919423392659"> <i class="material-icons tiny cGrey">call</i>
+                                Pranjal Bafna</a></li>
+                        <li><a class="cGrey" href="tel:+919527338738"><i class="material-icons tiny cGrey">call</i>
+                                Shubham Bafna</a></li>
+                        <li><a class="cGrey" href="tel:+912426297489"><i class="material-icons tiny cGrey">call</i>
+                                Bafna Residency</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <small>Trademark @Bafna Brothers</small>
+                <small>
+                    <a class="grey-text text-lighten-4 right" href="#!">Designed & Developed - yashkumat</a>
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assests/functions.js"></script>
+    </script>
+</body>
+
+</html>
