@@ -197,7 +197,7 @@ function whatsapp() {
 
         whatsappTable += "\nFinal Amount: " + FinalAmount;
 
-        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n" + whatsappTable + "\n\nyour Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://www.archbook.in/demo";
+        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n" + whatsappTable + "\n\nyour Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
         console.log(message);
         var url = 'https://wa.me/+919422728489/?text=' + encodeURIComponent(message);
         window.open(url);
