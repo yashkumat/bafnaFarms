@@ -14,6 +14,7 @@ var invoice = "";
 var price = [];
 var deliveryAvailable = "";
 var dist = ""
+var billGenerated = false;
 var prices = {
     // [price in vambori, price in rahuri, prive in nagar]
     guava: [40, 40, 40, "Farm fresh Alphanso straight from farms"],
@@ -215,7 +216,6 @@ function allvaluestostring(that) {
             '</div>';
 
         document.getElementById('invoice').innerHTML = invoice;
-
     } else {
         billNotGenerated()
     }
@@ -245,7 +245,7 @@ function isNumber(evt) {
 // send whatsapp message
 function whatsapp() {
 
-    if (!billGenerated) {
+    if (billGenerated == flase) {
         var url = "https://wa.me/+919422728489/?text=Thank%20you%20for%20contacting%3A%20%0ABAFNA%20FARMS%20fresh%20%26%20organic%20fruits%20%26%20vegetable!%0A%0AEnter%20Item%20name%3A%20%0AQuantity%3A%0A%0A%0AWe%20will%20get%20back%20to%20you%20asap!"
         window.open(url);
     } else {
@@ -329,7 +329,7 @@ function checkRadius(lat, long) {
         return 2
     }
     else {
-        return 10000
+        return 0
     }
 }
 
