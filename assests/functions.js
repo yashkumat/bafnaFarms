@@ -1,18 +1,10 @@
-var showAddressButton = document.getElementById("showAddress");
 var message = "";
 var address = "";
 var whatsappTable = "";
 var total = [];
 var FinalAmount = "";
-var prices = {
-    // [price in vambori, price in rahuri, prive in nagar]
-    mango: [50, 60, 70, "Farm fresh Alphanso straight from farms"],
-    grapes: [60, 70, 80, "Each grape taste sweet and juicy"],
-    oranges: [70, 90, 100, "Healthy immune system, Natural skin care"],
-    watermelon: [80, 20, 40, "Helps You Hydrate. Sweet and juicy"],
-    onion: [90, 60, 50, "Export quality, Best and all type of Onions"],
-    muskmelon: [100, 100, 30, "Nutrient Dense, sweet and delicate"]
-}
+var lat = "";
+var long = "";
 var items = [];
 var quantity = []
 var date = new Date();
@@ -20,40 +12,60 @@ var content;
 var ItemData = "";
 var invoice = "";
 var price = [];
-var d = "";
+var deliveryAvailable = "";
+var dist = ""
+var prices = {
+    // [price in vambori, price in rahuri, prive in nagar]
+    guava: [40, 40, 40, "Farm fresh Alphanso straight from farms"],
+    grapes: [40, 40, 50, "Each grape taste sweet and juicy"],
+    oranges: [50, 60, 60, "Healthy immune system, Natural skin care"],
+    watermelon: [15, 15, 15, "Helps You Hydrate. Sweet and juicy"],
+    onion: [20, 20, 20, "Export quality, Best and all type of Onions"],
+    muskmelon: [30, 30, 30, "Nutrient Dense, sweet and delicate"]
+}
+
 
 // Materialize initialiZation
 $(document).ready(function () {
     $('.slider').slider({ interval: 3000 });
     $('.scrollspy').scrollSpy();
     $('select').formSelect();
-    // $('select').material_select();
+    $('.modal').modal();
 });
-
-//  Get location
-function getLocation() {
-    d = document.getElementById("location").value;
-    if (d == "vambori") {
-        setValues(0)
-    } else if (d == 'rahuri') {
-        setValues(1)
-    } else {
-        setValues(2)
-    }
-}
 
 // Set price and variety
 function setValues(x) {
-    document.getElementById('mangoPrice').innerHTML = prices.mango[x]
-    document.getElementById('grapesPrice').innerHTML = prices.grapes[x]
-    document.getElementById('orangePrice').innerHTML = prices.oranges[x]
-    document.getElementById('watermelonPrice').innerHTML = prices.watermelon[x]
-    document.getElementById('onionPrice').innerHTML = prices.onion[x]
-    document.getElementById('muskmelonPrice').innerHTML = prices.muskmelon[x]
+
+    if (between(x, 0, 3)) {
+        document.getElementById('guavaPrice').innerHTML = "Rs. " + prices.guava[x] + " Per Kg"
+        document.getElementById('grapesPrice').innerHTML = "Rs. " + prices.grapes[x] + " Per Kg"
+        document.getElementById('orangePrice').innerHTML = "Rs. " + prices.oranges[x] + " Per Kg"
+        document.getElementById('watermelonPrice').innerHTML = "Rs. " + prices.watermelon[x] + " Per Kg"
+        document.getElementById('onionPrice').innerHTML = "Rs. " + prices.onion[x] + " Per Kg"
+        document.getElementById('muskmelonPrice').innerHTML = "Rs. " + prices.muskmelon[x] + " Per Kg"
+        document.getElementById('ProductDetails').innerHTML = "Quantity <i class='material-icons small'>create</i>";
+    }
+    else {
+        document.getElementById('guavaQuantity').style.display = "none"
+        document.getElementById('grapesQuantity').style.display = "none"
+        document.getElementById('orangesQuantity').style.display = "none"
+        document.getElementById('watermelonQuantity').style.display = "none"
+        document.getElementById('onionQuantity').style.display = "none"
+        document.getElementById('muskmelonQuantity').style.display = "none"
+        document.getElementById('guavaPrice').style.display = "none"
+        document.getElementById('grapesPrice').style.display = "none"
+        document.getElementById('orangePrice').style.display = "none"
+        document.getElementById('watermelonPrice').style.display = "none"
+        document.getElementById('onionPrice').style.display = "none"
+        document.getElementById('muskmelonPrice').style.display = "none"
+        document.getElementById('bill').style.display = "none"
+        document.getElementById('details').style.display = "none"
+
+    }
 }
 
 window.onload = function () {
-    document.getElementById('mangoVariety').innerHTML = prices.mango[3]
+    document.getElementById('guavaVariety').innerHTML = prices.guava[3]
     document.getElementById('grapeVariety').innerHTML = prices.grapes[3]
     document.getElementById('orangeVariety').innerHTML = prices.oranges[3]
     document.getElementById('watermelonVariety').innerHTML = prices.watermelon[3]
@@ -69,12 +81,24 @@ function getAddress() {
 // create address link and button which redirects to google maps
 function showPosition(position) {
 
+    lat = position.coords.latitude;
+    long = position.coords.longitude
     var element = document.getElementById("hideCheck");
+    var LocationName = checkRadius(lat, long);
+    var showAddressButton = document.getElementById("showAddress");
 
     if (position.coords.latitude) {
-        address = "https://www.google.com/maps/place/" + position.coords.latitude + "," + position.coords.longitude;
-        element.innerHTML = "<i class='fa fa-check-circle cGrey' id='check' aria-hidden='true'></i>";
-        showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light bGreen cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
+        address = "https://www.google.com/maps/place/" + lat + "," + long;
+        if (between(LocationName, 0, 3)) {
+            setValues(LocationName);
+            element.innerHTML = "<i class='fa fa-check-circle' id='check' aria-hidden='true'></i>";
+            showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light bPink cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
+            deliveryAvailable = true;
+        } else {
+            setValues(LocationName);
+            $('#LocationNotSet').modal('open');
+            deliveryAvailable = false;
+        }
     } else {
         element.innerHTML = "<small>Enter Manually in whatsapp!<small>";
     }
@@ -82,19 +106,30 @@ function showPosition(position) {
 
 // First letter capital
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // get form value stored in out. out is formated to json format in jsonString which is then converted to json object obj.
 function allvaluestostring(that) {
 
-    if (address != "" && d != "") {
+    if (deliveryAvailable) {
         var out = "";
+        var name = "";
+        var address = ""
 
         $.each($(that).serializeArray(), function (idx, el) {
-            el.value == 0
-              ? (out += '\n"' + capitalizeFirstLetter(el.name) + '":"0",')
-              : (out += '\n"' + capitalizeFirstLetter(el.name) + '" : "' + el.value +'",');
+
+            if (isNaN(el.value)) {
+                if (el.name == "fullname") {
+                    name = capitalizeFirstLetter(el.value)
+                } else {
+                    address = capitalizeFirstLetter(el.value)
+                }
+            } else {
+                el.value == 0
+                    ? (out += '\n"' + capitalizeFirstLetter(el.name) + '":"0",')
+                    : (out += '\n"' + capitalizeFirstLetter(el.name) + '" : "' + el.value + '",');
+            }
         });
 
         var jsonString = "{" + out.substring(0, out.length - 1) + "}";
@@ -129,7 +164,7 @@ function allvaluestostring(that) {
         }
 
         if (ItemData == "") {
-            content = "<h5>No Item Selected. Please Enter Quantity!</h5>"
+            content = "<center><h5 class='cYellow center-align'>No Item Selected. Please Enter Quantity!</h5></center>"
         } else {
             content =
                 '<div id="receiptData">' +
@@ -139,6 +174,9 @@ function allvaluestostring(that) {
                 '<div class="invoice-title card-title center-align">Bafna Farm\'s fresh fruits and vegetables</div>' +
                 '<p class="center-align">Receipt, Dated : ' + date.toDateString() + '</p>' +
                 '<br>' +
+                '<small>Customer Details: </small>' +
+                '<p> Name: ' + name + '<br>Address: ' + address +
+                '</p><br>' +
                 '<table class="centered responsive-table striped" id="receipt">' +
                 '<thead>' +
                 '<th>Item</th>' +
@@ -162,13 +200,13 @@ function allvaluestostring(that) {
             content +
             '<br>' +
             '<div class="row">' +
-            '<div class="col s6 l3 push-l3">' +
-            '<a class="btn-small btn-block waves-effect waves-light bGreen cBlack" href="#payment">' +
-            '<i class="material-icons">add_shopping_cart</i> Place order</a>' +
+            '<div class="col s6 l4 push-l2">' +
+            '<a class="btn-small btn-block waves-effect waves-light bDark cBlack" href="#payment">' +
+            'Place order</a>' +
             '</div>' +
-            '<div class="col s6 l3 push-l3">' +
-            '<button class="btn-small btn-block waves-effect waves-light bGreen cBlack" onclick="saveReceipt()">' +
-            '<i class="material-icons">save_alt</i> Save Receipt</button>' +
+            '<div class="col s6 l4 push-l2">' +
+            '<button class="btn-small btn-block waves-effect waves-light bDark cBlack" onclick="saveReceipt()">' +
+            'Save Receipt</button>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -177,31 +215,40 @@ function allvaluestostring(that) {
             '</div>';
 
         document.getElementById('invoice').innerHTML = invoice;
-    } else {
-        var toastHTML = '<small>Please provide all above information!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
-        M.toast({ html: toastHTML, classes: 'rounded' });
-    }
 
+    } else {
+        billNotGenerated()
+    }
 };
+
+function billNotGenerated() {
+    var toastHTML = '<small>Please input all the fields step by step!</small>';
+    M.toast({ html: toastHTML, classes: 'rounded center-align' });
+    window.location.href = '#setAddress'
+}
 
 // Type if nuber only
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
+        evt.preventDefault();
+        document.getElementById("error").style.display = "inline"
+        document.getElementById("error").innerHTML = "Enter a positive number! &nbsp; <i class='close material-icons'>close</i>"
+        window.location.href = '#onionPrice'
+    } else {
+        document.getElementById("error").style.display = "none"
     }
-    return true;
 }
 
 
 // send whatsapp message
 function whatsapp() {
 
-    if (address == "" || d == "" || ItemData == "") {
-        var toastHTML = '<small>Please provide all above information or call or refresh!</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
-        M.toast({ html: toastHTML, classes: 'rounded' });
-    }else {
+    if (!billGenerated) {
+        var url = "https://wa.me/+919422728489/?text=Thank%20you%20for%20contacting%3A%20%0ABAFNA%20FARMS%20fresh%20%26%20organic%20fruits%20%26%20vegetable!%0A%0AEnter%20Item%20name%3A%20%0AQuantity%3A%0A%0A%0AWe%20will%20get%20back%20to%20you%20asap!"
+        window.open(url);
+    } else {
         whatsappTable = "Item - Quantity\n";
         for (var j = 0; j < price.length; j++) {
             if (quantity[j] > 0)
@@ -237,33 +284,26 @@ function saveReceipt() {
     pdf.fromHTML(
         source,
         margins.left,
-        margins.top, 
+        margins.top,
         {
-            "width":"100%"
+            "width": "100%"
         },
-
         function (dispose) {
-
             pdf.save('Test.pdf');
         }, margins
     );
 }
 
-// check quantity between 0 and 9
-function between(x, min, max) {
-    return x >= min && x <= max;
-}
-
 // check if location is set, also check if quantity is positive
 function checkIfLocationIsSet(event) {
-    if (d == "") {
-        var toastHTML = '<small>Please set location</small><a class="btn-flat toast-action" href="#setLocation">Click here</a>';
-        M.toast({ html: toastHTML, classes: 'rounded' });
-    } else if (!between(event.keyCode, 47, 58)) {
-        var toastHTML = '<small>Enter positive quantity in numbers!</small><a class="btn-flat toast-action href="#setQuantity" ">Undo</a>';
-        M.toast({ html: toastHTML, classes: 'rounded' });
+    if (dist == "") {
+        var toastHTML = '<small>Please set your location first!</small>';
+        M.toast({ html: toastHTML, classes: 'rounded center-align' });
+        window.location.href = '#setAddress'
     }
 }
+
+
 
 // Hides pulse midway call button on navbar
 $(document).ready(function () {
@@ -273,11 +313,141 @@ $(document).ready(function () {
 });
 
 
+// Check radius 
+function checkRadius(lat, long) {
+
+    var dist = distance(19.2888432, 74.7230288, lat, long);
+    var direction = getDirection(19.2888432, 74.7230288, lat, long);
+
+    if (between(dist, 0, 1)) {
+        return 0
+    } else if (between(dist, 13, 15) && direction == "NW") {
+        return 1
+    } else if (between(dist, 21.5, 24) && direction == "NW") {
+        return 1
+    } else if (between(dist, 15, 27) && direction == "S") {
+        return 2
+    }
+    else {
+        return 10000
+    }
+}
 
 
+function distance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    dist = R * c; // Distance in km
+    return dist;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
+}
+
+function getDirection(lat1, lon1, lat2, lon2) {
+    x1 = lat2;
+    y1 = lon2;
+    x2 = lat1;
+    y2 = lon1;
+
+    var radians = getAtan2((y1 - y2), (x1 - x2));
+
+    function getAtan2(y, x) {
+        return Math.atan2(y, x);
+    };
+
+    var compassReading = radians * (180 / Math.PI);
+
+    var coordNames = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"];
+    var coordIndex = Math.round(compassReading / 45);
+    if (coordIndex < 0) {
+        coordIndex = coordIndex + 8
+    };
+
+    return coordNames[coordIndex]; // returns the coordinate value
+}
+
+// check quantity between 0 and 9
+function between(x, min, max) {
+    return x >= min && x <= max;
+}
+
+$(function () {
+    $(".preload").fadeOut(2000, function () {
+        $(".content").fadeIn(1000);
+    });
+});
 
 
+// function abc(){
+//     console.log(distance(19.2888432, 74.7230288, 19.2887573, 74.7264641));
+//     console.log(distance(19.2888432, 74.7230288, 19.3943102, 74.6419374));
+//     console.log(distance(19.2888432, 74.7230288, 19.4487672, 74.597404));
+//     console.log(distance(19.2888432, 74.7230288, 19.1104714, 74.6726324));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.2887573, 74.7264641));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.3943102, 74.6419374));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.4487672, 74.597404));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.1104714, 74.6726324));
+// }
 
+// function rahuri(){
+//     console.log(distance(19.2888432, 74.7230288, 19.3839851, 74.6475175));
+//     console.log(distance(19.2888432, 74.7230288, 19.3982843, 74.6420645));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.3839851, 74.6475175));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.3982843, 74.6420645));
+// }
+
+// function factory() {
+//     console.log(distance(19.2888432, 74.7230288, 19.4460753, 74.5963616));
+//     console.log(distance(19.2888432, 74.7230288, 19.47518,74.6143342));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.4460753, 74.5963616));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.47518,74.6143342));
+// }
+
+// function nagar() {
+//     console.log(distance(19.2888432, 74.7230288, 19.1592684,74.6830443));
+//     console.log(distance(19.2888432, 74.7230288, 19.0515348,74.7413103));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.1592684,74.6830443));
+//     console.log(getDirection(19.2888432, 74.7230288, 19.0515348,74.7413103));
+// }
+
+// function distance(lon1, lat1, lon2, lat2) {
+//     var R = 6371; // Radius of the earth in km
+//     // var dLat = (lat2 - lat1).toRad();  // Javascript functions in radians
+//     // var dLon = (lon2 - lon1).toRad();
+//     // var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//     //     Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+//     //     Math.sin(dLon / 2) * Math.sin(dLon / 2);
+//     // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//     // var d = R * c; // Distance in km
+//     // return d;
+//     dlon = lon2 - lon1
+//     dlat = lat2 - lat1
+//     a = (Math.sin(dlat / 2)) ^ 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dlon / 2)) ^ 2
+//     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+//     var     distance = R * c
+//     return distance
+// }
+
+// if (typeof (Number.prototype.toRad) === "undefined") {
+//     Number.prototype.toRad = function () {
+//         return this * Math.PI / 180;
+//     }
+// }
+
+// user = {lat: 1, long: 2}
+
+    // console.log(user.lat);
+    // console.log(Object.keys(location));
+    // console.log(Object.values(location)[1][1]);
 
 
 // DUMP
