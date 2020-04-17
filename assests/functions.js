@@ -19,7 +19,7 @@ var customerAddress = ""
 var billGenerated = false;
 var prices = {
     // [price in vambori, price in rahuri, prive in nagar]
-    guava: [40, 40, 40, "Farm fresh Alphanso straight from farms"],
+    guava: [40, 40, 40, "One of the most gregarious of fruit trees, Boost Heart Health"],
     grapes: [40, 40, 50, "Each grape taste sweet and juicy"],
     oranges: [50, 60, 60, "Healthy immune system, Natural skin care"],
     watermelon: [15, 15, 15, "Helps You Hydrate. Sweet and juicy"],
