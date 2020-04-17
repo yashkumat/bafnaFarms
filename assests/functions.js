@@ -14,6 +14,8 @@ var invoice = "";
 var price = [];
 var deliveryAvailable = "";
 var dist = ""
+var customerName = "";
+var customerAddress = ""
 var billGenerated = false;
 var prices = {
     // [price in vambori, price in rahuri, prive in nagar]
@@ -115,16 +117,14 @@ function allvaluestostring(that) {
 
     if (deliveryAvailable) {
         var out = "";
-        var name = "";
-        var address = ""
 
         $.each($(that).serializeArray(), function (idx, el) {
 
             if (isNaN(el.value)) {
                 if (el.name == "fullname") {
-                    name = capitalizeFirstLetter(el.value)
+                    customerName = capitalizeFirstLetter(el.value)
                 } else {
-                    address = capitalizeFirstLetter(el.value)
+                    customerAddress = capitalizeFirstLetter(el.value)
                 }
             } else {
                 el.value == 0
@@ -176,7 +176,7 @@ function allvaluestostring(that) {
                 '<p class="center-align">Receipt, Dated : ' + date.toDateString() + '</p>' +
                 '<br>' +
                 '<small>Customer Details: </small>' +
-                '<p> Name: ' + name + '<br>Address: ' + address +
+                '<p> Name: ' + customerName + '<br>Address: ' + customerAddress +
                 '</p><br>' +
                 '<table class="centered responsive-table striped" id="receipt">' +
                 '<thead>' +
@@ -203,11 +203,11 @@ function allvaluestostring(that) {
             '<div class="row">' +
             '<div class="col s6 l4 push-l2">' +
             '<a class="btn-small btn-block waves-effect waves-light bDark cBlack" href="#payment">' +
-            'Place order</a>' +
+            'order</a>' +
             '</div>' +
             '<div class="col s6 l4 push-l2">' +
             '<button class="btn-small btn-block waves-effect waves-light bDark cBlack" onclick="saveReceipt()">' +
-            'Save Receipt</button>' +
+            'Save <span class="hide-on-small-only">Bill</span></button>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -216,9 +216,7 @@ function allvaluestostring(that) {
             '</div>';
 
         document.getElementById('invoice').innerHTML = invoice;
-        billGenerated = true
     } else {
-        billGenerated = false
         billNotGenerated()
     }
 };
@@ -259,7 +257,7 @@ function whatsapp() {
 
         whatsappTable += "\nFinal Amount: " + FinalAmount;
 
-        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:\n" + whatsappTable + "\n\nDeliver to Address - \n" + address + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
+        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:\n\nName: " + customerName + "\n\nDeliver to Address:\n" + customerAddress + "\nGoogle maps link:\n" + address + "\n\n" + whatsappTable  + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
         console.log(message);
         var url = 'https://wa.me/+919422728489/?text=' + encodeURIComponent(message);
         window.open(url);
@@ -331,7 +329,7 @@ function checkRadius(lat, long) {
         return 2
     }
     else {
-        return 0
+        return 10000
     }
 }
 
