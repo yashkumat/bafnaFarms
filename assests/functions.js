@@ -19,7 +19,7 @@ var customerAddress = ""
 var billGenerated = false;
 var prices = {
     // [price in vambori, price in rahuri, prive in nagar]
-    guava: [40, 40, 40, "One of the most gregarious of fruit trees, Boost Heart Health"],
+    guava: [40, 40, 40, "Farm fresh Alphanso straight from farms"],
     grapes: [40, 40, 50, "Each grape taste sweet and juicy"],
     oranges: [50, 60, 60, "Healthy immune system, Natural skin care"],
     watermelon: [15, 15, 15, "Helps You Hydrate. Sweet and juicy"],
@@ -95,7 +95,7 @@ function showPosition(position) {
         if (between(LocationName, 0, 3)) {
             setValues(LocationName);
             element.innerHTML = "<i class='fa fa-check-circle' id='check' aria-hidden='true'></i>";
-            showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light bPink cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Open Maps</a>";
+            showAddressButton.innerHTML = "<a href='" + address + "' class='waves-effect waves-light bPink cBlack btn-small btn-block'><i class='fa fa-map-marker' aria-hidden='true' ></i> Google Maps Link</a>";
             deliveryAvailable = true;
         } else {
             setValues(LocationName);
@@ -216,6 +216,7 @@ function allvaluestostring(that) {
             '</div>';
 
         document.getElementById('invoice').innerHTML = invoice;
+        billGenerated = true
     } else {
         billNotGenerated()
     }
@@ -257,7 +258,7 @@ function whatsapp() {
 
         whatsappTable += "\nFinal Amount: " + FinalAmount;
 
-        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:\n\nName: " + customerName + "\n\nDeliver to Address:\n" + customerAddress + "\nGoogle maps link:\n" + address + "\n\n" + whatsappTable  + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
+        message = "Thank you for contacting\nBAFNA FARM's fresh fruits and vegetables\n\n\nOrder received:\n\nName: " + customerName + "\n\nDeliver to Address:\n" + customerAddress + "\nGoogle maps link:\n" + address + "\n\n" + whatsappTable + "\n\nWe will get back to you asap!\n\nGo back ->\nhttps://yashkumat.github.io/bafnaFarms/";
         console.log(message);
         var url = 'https://wa.me/+919422728489/?text=' + encodeURIComponent(message);
         window.open(url);
@@ -329,7 +330,7 @@ function checkRadius(lat, long) {
         return 2
     }
     else {
-        return 10000
+        return 0
     }
 }
 
