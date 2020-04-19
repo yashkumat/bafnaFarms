@@ -330,7 +330,7 @@ function checkRadius(lat, long) {
         return 2
     }
     else {
-        return 10000
+        return 1
     }
 }
 
